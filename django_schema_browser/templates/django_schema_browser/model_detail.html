@@ -1,20 +1,23 @@
 {% extends "django_schema_browser/base.html" %}
+{% load django_schema_browser_i18n %}
 
-{% block title %}Detail {{ model_label }}{% endblock title %}
+{% block title %}
+    {% btrans "[Details of %(current_model)s]" current_model=model_label %}
+{% endblock title %}
 
 {% block content %}
     <h1>{{ model_label }}</h1>
     <p class="meta">{{ description }}</p>
 
-    <h2>Champs du modele</h2>
+    <h2>{% btrans "[Model fields]" %}</h2>
     {% if fields %}
         <table>
             <thead>
             <tr>
-                <th>Nom</th>
-                <th>Type</th>
-                <th>Description</th>
-                <th>Relation</th>
+                <th>{% btrans "[Name]" %}</th>
+                <th>{% btrans "[Type]" %}</th>
+                <th>{% btrans "[Description]" %}</th>
+                <th>{% btrans "[Relation]" %}</th>
             </tr>
             </thead>
             <tbody>
@@ -29,7 +32,7 @@
                                 {{ field.related_target.label }}
                             </a>
                         {% else %}
-                            -
+                            {% btrans "[None]" %}
                         {% endif %}
                     </td>
                 </tr>
@@ -37,18 +40,18 @@
             </tbody>
         </table>
     {% else %}
-        <p class="empty">Aucun champ expose.</p>
+        <p class="empty">{% btrans "[No exposed field.]" %}</p>
     {% endif %}
-
-    <h2>Relations inverses</h2>
+    <br><br>
+    <h2>{% btrans "[Reverse relations]" %}</h2>
     {% if reverse_relations %}
         <table>
             <thead>
             <tr>
-                <th>Champ inverse</th>
-                <th>Type</th>
-                <th>Modele source</th>
-                <th>Description</th>
+                <th>{% btrans "[Reverse field]" %}</th>
+                <th>{% btrans "[Type]" %}</th>
+                <th>{% btrans "[Source model]" %}</th>
+                <th>{% btrans "[Description]" %}</th>
             </tr>
             </thead>
             <tbody>
@@ -67,6 +70,6 @@
             </tbody>
         </table>
     {% else %}
-        <p class="empty">Aucune relation inverse.</p>
+        <p class="empty">{% btrans "[No reverse relation.]" %}</p>
     {% endif %}
 {% endblock content %}

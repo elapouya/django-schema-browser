@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Commande de gestion Django."""
+"""Django management entry point."""
 
 import os
 import sys
@@ -10,9 +10,7 @@ def main() -> None:
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
-        raise ImportError(
-            "Django n'est pas installe. Installez les dependances avant d'executer cette commande."
-        ) from exc
+        raise ImportError from exc
     execute_from_command_line(sys.argv)
 
 

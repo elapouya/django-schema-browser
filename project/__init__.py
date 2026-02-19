@@ -1,1 +1,1 @@
-"""Projet Django principal."""
+"""Project package."""

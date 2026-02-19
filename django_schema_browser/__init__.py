@@ -1,1 +1,1 @@
-"""App django_schema_browser."""
+"""django_schema_browser package."""

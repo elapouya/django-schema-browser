@@ -1,19 +1,24 @@
 {% extends "django_schema_browser/base.html" %}
+{% load django_schema_browser_i18n %}
 
-{% block title %}Modeles de {{ app.name }}{% endblock title %}
+{% block title %}
+    {% btrans "[Models of %(app_name)s]" app_name=app.name %}
+{% endblock title %}
 
 {% block content %}
     <h1>{{ app.name }}</h1>
     <p class="meta">{{ app.description }}</p>
-    <p class="meta">Module: <code>{{ app.module }}</code></p>
+    <p class="meta">
+        {% btrans "[Module: %(module_name)s]" module_name=app.module %}
+    </p>
 
     {% if models %}
         <table>
             <thead>
             <tr>
-                <th>Modele</th>
-                <th>Description</th>
-                <th>Champs</th>
+                <th>{% btrans "[Model]" %}</th>
+                <th>{% btrans "[Description]" %}</th>
+                <th>{% btrans "[Fields]" %}</th>
             </tr>
             </thead>
             <tbody>
@@ -31,6 +36,6 @@
             </tbody>
         </table>
     {% else %}
-        <p class="empty">Cette application ne contient aucun modele.</p>
+        <p class="empty">{% btrans "[This application has no model.]" %}</p>
     {% endif %}
 {% endblock content %}

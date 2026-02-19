@@ -1,19 +1,20 @@
 {% extends "django_schema_browser/base.html" %}
+{% load django_schema_browser_i18n %}
 
-{% block title %}Applications Django{% endblock title %}
+{% block title %}{% btrans "[Project applications]" %}{% endblock title %}
 
 {% block content %}
-    <h1>Applications du projet</h1>
-    <p class="meta">Toutes les apps trouvees dans le repertoire du projet courant.</p>
+    <h1>{% btrans "[Project applications]" %}</h1>
+    <p class="meta">{% btrans "[All applications found in the current project directory.]" %}</p>
 
     {% if apps %}
         <table>
             <thead>
             <tr>
-                <th>Application</th>
-                <th>Module Python</th>
-                <th>Description</th>
-                <th>Modeles</th>
+                <th>{% btrans "[Application]" %}</th>
+                <th>{% btrans "[Python module]" %}</th>
+                <th>{% btrans "[Description]" %}</th>
+                <th>{% btrans "[Models]" %}</th>
             </tr>
             </thead>
             <tbody>
@@ -30,6 +31,6 @@
             </tbody>
         </table>
     {% else %}
-        <p class="empty">Aucune application locale detectee.</p>
+        <p class="empty">{% btrans "[No local application detected.]" %}</p>
     {% endif %}
 {% endblock content %}

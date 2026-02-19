@@ -1,4 +1,4 @@
-"""URLs de l'application django_schema_browser."""
+"""URL patterns for django_schema_browser."""
 
 from django.urls import path
 

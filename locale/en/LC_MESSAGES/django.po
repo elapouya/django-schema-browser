@@ -1,0 +1,106 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: django-schema-browser\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-19 17:02+0000\n"
+"PO-Revision-Date: 2026-02-19 17:02+0000\n"
+"Last-Translator: \n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "[All applications found in the current project directory.]"
+msgstr "All applications found in the current project directory."
+
+msgid "[App not found: %(app_label)s]"
+msgstr "App not found: %(app_label)s"
+
+msgid "[Application]"
+msgstr "Application"
+
+msgid "[Description]"
+msgstr "Description"
+
+msgid "[Details of %(current_model)s]"
+msgstr "Details of %(current_model)s"
+
+msgid "[Django Schema Browser]"
+msgstr "Django Schema Browser"
+
+msgid "[English]"
+msgstr "English"
+
+msgid "[Field %(field_name)s of model %(model_label)s]"
+msgstr "Field %(field_name)s of model %(model_label)s"
+
+msgid "[Fields]"
+msgstr "Fields"
+
+msgid "[French]"
+msgstr "French"
+
+msgid "[Home]"
+msgstr "Home"
+
+msgid "[Model fields]"
+msgstr "Model fields"
+
+msgid "[Model not found: %(app_label)s.%(model_name)s]"
+msgstr "Model not found: %(app_label)s.%(model_name)s"
+
+msgid "[Model]"
+msgstr "Model"
+
+msgid "[Models of %(app_name)s]"
+msgstr "Models of %(app_name)s"
+
+msgid "[Models]"
+msgstr "Models"
+
+msgid "[Module: %(module_name)s]"
+msgstr "Module: %(module_name)s"
+
+msgid "[Name]"
+msgstr "Name"
+
+msgid "[No description.]"
+msgstr "No description."
+
+msgid "[No exposed field.]"
+msgstr "No exposed field."
+
+msgid "[No local application detected.]"
+msgstr "No local application detected."
+
+msgid "[No reverse relation.]"
+msgstr "No reverse relation."
+
+msgid "[None]"
+msgstr "None"
+
+msgid "[Project applications]"
+msgstr "Project applications"
+
+msgid "[Python module]"
+msgstr "Python module"
+
+msgid "[Relation]"
+msgstr "Relation"
+
+msgid "[Reverse field]"
+msgstr "Reverse field"
+
+msgid "[Reverse relations]"
+msgstr "Reverse relations"
+
+msgid "[Source model]"
+msgstr "Source model"
+
+msgid "[This application has no model.]"
+msgstr "This application has no model."
+
+msgid "[Type]"
+msgstr "Type"

@@ -1,4 +1,4 @@
-"""Configuration ASGI."""
+"""ASGI config."""
 
 import os
 

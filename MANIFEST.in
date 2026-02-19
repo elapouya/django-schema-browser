@@ -1,0 +1,4 @@
+include LICENSE
+include README.md
+recursive-include django_schema_browser/templates *.html
+recursive-include django_schema_browser/locale *.po *.mo

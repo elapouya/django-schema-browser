@@ -1,17 +1,53 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "django-schema-browser"
 version = "0.1.0"
-description = ""
+description = "Browse Django apps, models, fields, and reverse relations from a dedicated frontend."
+readme = { file = "README.md", content-type = "text/markdown" }
+license = { file = "LICENSE" }
 authors = [
-    {name = "elapouya@proton.me"}
+  { name = "Elapouya", email = "elapouya@proton.me" }
 ]
-readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 dependencies = [
-    "django (<6)"
+  "Django>=4.2,<6.0"
+]
+keywords = ["django", "schema", "models", "introspection", "database"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Framework :: Django",
+  "Framework :: Django :: 4.2",
+  "Framework :: Django :: 5.0",
+  "Framework :: Django :: 5.1",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
 ]
 
+[project.urls]
+Homepage = "https://github.com/elapouya/django-schema-browser"
+Repository = "https://github.com/elapouya/django-schema-browser"
+Issues = "https://github.com/elapouya/django-schema-browser/issues"
 
-[build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
-build-backend = "poetry.core.masonry.api"
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+include = ["django_schema_browser*"]
+
+[tool.setuptools.package-data]
+django_schema_browser = [
+  "templates/**/*.html",
+  "locale/*/LC_MESSAGES/*.po",
+  "locale/*/LC_MESSAGES/*.mo",
+]

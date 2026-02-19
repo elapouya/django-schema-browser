@@ -1,19 +1,61 @@
 # django-schema-browser
 
-Application Django qui introspecte les apps locales du projet et expose une navigation web:
+`django-schema-browser` ajoute une interface web pour introspecter les apps Django, leurs modeles, champs et relations inverses.
 
-- liste des applications detectees
-- liste des modeles d'une application
-- detail d'un modele (champs + relations inverses)
-
-## Lancer le projet
+## Installation
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py runserver
+pip install django-schema-browser
 ```
 
-Puis ouvrir `http://127.0.0.1:8000/`.
+## Configuration
+
+Dans `settings.py`:
+
+```python
+INSTALLED_APPS = [
+    # ...
+    "django_schema_browser",
+]
+```
+
+Dans `urls.py` du projet:
+
+```python
+from django.urls import include, path
+from django.conf.urls.i18n import i18n_patterns
+
+urlpatterns = [
+    path("i18n/", include("django.conf.urls.i18n")),
+]
+
+urlpatterns += i18n_patterns(
+    path("schema/", include("django_schema_browser.urls")),
+)
+```
+
+## Vues disponibles
+
+- Home: liste des apps detectees
+- Detail app: liste des modeles de l'app
+- Detail modele: champs + relations inverses
+
+## Build package (PyPI)
+
+```bash
+python -m pip install --upgrade build twine
+python -m build
+python -m twine check dist/*
+```
+
+Upload TestPyPI:
+
+```bash
+python -m twine upload --repository testpypi dist/*
+```
+
+Upload PyPI:
+
+```bash
+python -m twine upload dist/*
+```

@@ -54,6 +54,7 @@ cover/
 # Translations
 *.mo
 *.pot
+!django_schema_browser/locale/**/django.mo
 
 # Django stuff:
 *.log

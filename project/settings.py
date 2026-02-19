@@ -70,7 +70,6 @@ LANGUAGES = [
     ("en", _("[English]")),
     ("fr", _("[French]")),
 ]
-LOCALE_PATHS = [BASE_DIR / "locale"]
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True

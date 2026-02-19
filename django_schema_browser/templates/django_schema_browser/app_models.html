@@ -1,0 +1,36 @@
+{% extends "django_schema_browser/base.html" %}
+
+{% block title %}Modeles de {{ app.name }}{% endblock title %}
+
+{% block content %}
+    <h1>{{ app.name }}</h1>
+    <p class="meta">{{ app.description }}</p>
+    <p class="meta">Module: <code>{{ app.module }}</code></p>
+
+    {% if models %}
+        <table>
+            <thead>
+            <tr>
+                <th>Modele</th>
+                <th>Description</th>
+                <th>Champs</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for model in models %}
+                <tr>
+                    <td>
+                        <a href="{% url 'django_schema_browser:model_detail' app.label model.model_name %}">
+                            {{ model.name }}
+                        </a>
+                    </td>
+                    <td>{{ model.description }}</td>
+                    <td>{{ model.fields_count }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="empty">Cette application ne contient aucun modele.</p>
+    {% endif %}
+{% endblock content %}

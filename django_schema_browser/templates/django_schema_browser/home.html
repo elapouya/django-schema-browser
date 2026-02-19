@@ -1,0 +1,35 @@
+{% extends "django_schema_browser/base.html" %}
+
+{% block title %}Applications Django{% endblock title %}
+
+{% block content %}
+    <h1>Applications du projet</h1>
+    <p class="meta">Toutes les apps trouvees dans le repertoire du projet courant.</p>
+
+    {% if apps %}
+        <table>
+            <thead>
+            <tr>
+                <th>Application</th>
+                <th>Module Python</th>
+                <th>Description</th>
+                <th>Modeles</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for app in apps %}
+                <tr>
+                    <td>
+                        <a href="{% url 'django_schema_browser:app_models' app.label %}">{{ app.name }}</a>
+                    </td>
+                    <td><code>{{ app.module }}</code></td>
+                    <td>{{ app.description }}</td>
+                    <td>{{ app.models_count }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="empty">Aucune application locale detectee.</p>
+    {% endif %}
+{% endblock content %}

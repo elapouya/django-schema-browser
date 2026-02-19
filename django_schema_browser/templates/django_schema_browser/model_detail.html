@@ -1,0 +1,72 @@
+{% extends "django_schema_browser/base.html" %}
+
+{% block title %}Detail {{ model_label }}{% endblock title %}
+
+{% block content %}
+    <h1>{{ model_label }}</h1>
+    <p class="meta">{{ description }}</p>
+
+    <h2>Champs du modele</h2>
+    {% if fields %}
+        <table>
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Relation</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for field in fields %}
+                <tr id="field-{{ field.name }}">
+                    <td><code>{{ field.name }}</code></td>
+                    <td>{{ field.type }}</td>
+                    <td>{{ field.description }}</td>
+                    <td>
+                        {% if field.is_relation %}
+                            <a href="{% url 'django_schema_browser:model_detail' field.related_target.app_label field.related_target.model_name %}">
+                                {{ field.related_target.label }}
+                            </a>
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="empty">Aucun champ expose.</p>
+    {% endif %}
+
+    <h2>Relations inverses</h2>
+    {% if reverse_relations %}
+        <table>
+            <thead>
+            <tr>
+                <th>Champ inverse</th>
+                <th>Type</th>
+                <th>Modele source</th>
+                <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for relation in reverse_relations %}
+                <tr>
+                    <td>
+                        <a href="{% url 'django_schema_browser:model_detail' relation.source_target.app_label relation.source_target.model_name %}#field-{{ relation.source_field_name }}">
+                            {{ relation.source_model_label }}.{{ relation.source_field_name }}
+                        </a>
+                    </td>
+                    <td>{{ relation.type }}</td>
+                    <td>{{ relation.source_model_label }}</td>
+                    <td>{{ relation.description }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="empty">Aucune relation inverse.</p>
+    {% endif %}
+{% endblock content %}

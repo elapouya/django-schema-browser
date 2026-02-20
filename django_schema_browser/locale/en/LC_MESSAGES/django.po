@@ -99,6 +99,12 @@ msgstr "Reverse relations"
 msgid "[Source model]"
 msgstr "Source model"
 
+msgid "[SQL table]"
+msgstr "SQL table"
+
+msgid "[SQL table: %(table_name)s]"
+msgstr "SQL table: %(table_name)s"
+
 msgid "[This application has no model.]"
 msgstr "This application has no model."
 

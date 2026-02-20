@@ -84,8 +84,31 @@
             font-style: italic;
         }
 
-        nav {
-            margin-bottom: 14px;
+        .description-empty {
+            color: #9ca3af;
+            font-style: italic;
+        }
+
+        .breadcrumb-root {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .breadcrumb-icon {
+            width: 1em;
+            height: 1em;
+            color: var(--muted);
+            vertical-align: middle;
+        }
+
+        .breadcrumb-sep {
+            margin: 0 0.35rem;
+            color: var(--muted);
+        }
+
+        .breadcrumb-sep::before {
+            content: "/";
         }
 
         @media (max-width: 768px) {
@@ -98,9 +121,6 @@
 </head>
 <body>
 <main class="container">
-    <nav>
-        <a href="{% url 'django_schema_browser:home' %}">{% btrans "[Home]" %}</a>
-    </nav>
     <section class="card">
         {% block content %}{% endblock content %}
     </section>

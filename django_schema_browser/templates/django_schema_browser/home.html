@@ -4,7 +4,17 @@
 {% block title %}{% btrans "[Project applications]" %}{% endblock title %}
 
 {% block content %}
-    <h1>{% btrans "[Project applications]" %}</h1>
+    <h1>
+        <span class="breadcrumb-root">
+            <svg class="breadcrumb-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="3" y="4" width="6" height="4" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                <rect x="15" y="4" width="6" height="4" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                <rect x="9" y="16" width="6" height="4" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M6 8V12H18V8M12 12V16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            {% btrans "[Project applications]" %}
+        </span>
+    </h1>
     <p class="meta">{% btrans "[All applications found in the current project directory.]" %}</p>
 
     {% if apps %}
@@ -24,7 +34,7 @@
                         <a href="{% url 'django_schema_browser:app_models' app.label %}">{{ app.name }}</a>
                     </td>
                     <td><code>{{ app.module }}</code></td>
-                    <td>{{ app.description }}</td>
+                    <td class="{% if not app.has_description %}description-empty{% endif %}">{{ app.description }}</td>
                     <td>{{ app.models_count }}</td>
                 </tr>
             {% endfor %}

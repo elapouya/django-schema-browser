@@ -1,12 +1,30 @@
 {% extends "django_schema_browser/base.html" %}
 {% load django_schema_browser_i18n %}
+{% load i18n %}
 
 {% block title %}
     {% btrans "[Details of %(current_model)s]" current_model=model_label %}
 {% endblock title %}
 
 {% block content %}
-    <h1>{{ model_label }}</h1>
+    <h1>
+        <a class="breadcrumb-root" href="{% url 'django_schema_browser:home' %}">
+            <svg class="breadcrumb-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="3" y="4" width="6" height="4" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                <rect x="15" y="4" width="6" height="4" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                <rect x="9" y="16" width="6" height="4" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M6 8V12H18V8M12 12V16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            {% btrans "[Project applications]" %}
+        </a>
+        <span class="breadcrumb-sep"></span>
+        <a href="{% url 'django_schema_browser:app_models' app_label %}">{{ app_label }}</a>
+        <span class="breadcrumb-sep"></span>
+        {{ model_label }}
+    </h1>
+    <p class="meta">
+        {% trans "[SQL table:]" %} <code>{{ db_table }}</code>
+    </p>
     <p class="meta">{{ description }}</p>
 
     <h2>{% btrans "[Model fields]" %}</h2>
@@ -25,8 +43,8 @@
                 <tr id="field-{{ field.name }}">
                     <td><code>{{ field.name }}</code></td>
                     <td>{{ field.type }}</td>
-                    <td>{{ field.description }}</td>
-                    <td>
+                    <td class="{% if not field.has_description %}description-empty{% endif %}">{{ field.description }}</td>
+                    <td class="{% if not field.is_relation %}description-empty{% endif %}">
                         {% if field.is_relation %}
                             <a href="{% url 'django_schema_browser:model_detail' field.related_target.app_label field.related_target.model_name %}">
                                 {{ field.related_target.label }}

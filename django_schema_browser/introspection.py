@@ -91,7 +91,7 @@ def _app_description(app_config: AppConfig) -> str:
         _normalize_text(package_module_doc),
     ]
     unique_parts = [part for part in dict.fromkeys(parts) if part]
-    return " | ".join(unique_parts) if unique_parts else NO_DESCRIPTION
+    return " | ".join(unique_parts) if unique_parts else tr(NO_DESCRIPTION)
 
 
 def _model_description(model: type[Model]) -> str:
@@ -154,12 +154,14 @@ def list_project_apps() -> list[dict[str, Any]]:
     app_entries = []
     for app_config in _project_app_configs():
         models = list(app_config.get_models())
+        description = _app_description(app_config)
         app_entries.append(
             {
                 "label": app_config.label,
                 "name": strip_brackets(str(app_config.verbose_name)),
                 "module": app_config.name,
-                "description": _app_description(app_config),
+                "description": description,
+                "has_description": description != tr(NO_DESCRIPTION),
                 "models_count": len(models),
             }
         )
@@ -169,11 +171,13 @@ def list_project_apps() -> list[dict[str, Any]]:
 def get_project_app(app_label: str) -> dict[str, Any]:
     app_config = _find_project_app_config(app_label)
     models = list(app_config.get_models())
+    description = _app_description(app_config)
     return {
         "label": app_config.label,
         "name": strip_brackets(str(app_config.verbose_name)),
         "module": app_config.name,
-        "description": _app_description(app_config),
+        "description": description,
+        "has_description": description != tr(NO_DESCRIPTION),
         "models_count": len(models),
     }
 
@@ -189,6 +193,7 @@ def list_app_models(app_label: str) -> list[dict[str, Any]]:
             {
                 "name": model.__name__,
                 "model_name": model._meta.model_name,
+                "db_table": model._meta.db_table,
                 "description": _model_description(model),
                 "fields_count": forward_fields_count,
             }
@@ -212,11 +217,13 @@ def _forward_fields(model: type[Model]) -> list[dict[str, Any]]:
         if field.auto_created and not field.concrete:
             continue
         related_target = _related_target(getattr(field, "related_model", None)) if field.is_relation else None
+        description = _field_description(field)
         fields.append(
             {
                 "name": field.name,
                 "type": _field_type(field),
-                "description": _field_description(field),
+                "description": description,
+                "has_description": description != tr(NO_DESCRIPTION),
                 "is_relation": bool(related_target),
                 "related_target": related_target,
             }
@@ -282,6 +289,7 @@ def get_model_details(app_label: str, model_name: str) -> dict[str, Any]:
         "app_label": model._meta.app_label,
         "model_name": model._meta.model_name,
         "model_label": model._meta.label,
+        "db_table": model._meta.db_table,
         "description": _model_detail_description(model),
         "fields": _forward_fields(model),
         "reverse_relations": _reverse_relations(model),

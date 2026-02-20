@@ -79,7 +79,7 @@ msgid "[No reverse relation.]"
 msgstr "Aucune relation inverse."
 
 msgid "[None]"
-msgstr "Aucun"
+msgstr "Aucune"
 
 msgid "[Project applications]"
 msgstr "Applications du projet"
@@ -98,6 +98,12 @@ msgstr "Relations inverses"
 
 msgid "[Source model]"
 msgstr "Modele source"
+
+msgid "[SQL table]"
+msgstr "Table SQL"
+
+msgid "[SQL table: %(table_name)s]"
+msgstr "Table SQL : %(table_name)s"
 
 msgid "[This application has no model.]"
 msgstr "Cette application ne contient aucun modele."

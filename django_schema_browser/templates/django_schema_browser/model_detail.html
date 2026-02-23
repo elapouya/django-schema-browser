@@ -22,10 +22,10 @@
         <span class="breadcrumb-sep"></span>
         {{ model_label }}
     </h1>
-    <p class="meta">
+    <p class="meta model-detail title">
         {% trans "[SQL table:]" %} <code>{{ db_table }}</code>
     </p>
-    <p class="meta">{{ description }}</p>
+    <p class="meta model-detail description">{{ description }}</p>
 
     <h2>{% btrans "[Model fields]" %}</h2>
     {% if fields %}

@@ -1,12 +1,18 @@
 """Schema browser views."""
 
-from django.http import Http404, HttpRequest, HttpResponse
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.http import Http404
 from django.views.generic import TemplateView
 
 from . import introspection
 
 
-class HomeView(TemplateView):
+class SchemaBrowserPermissionRequiredMixin(PermissionRequiredMixin):
+    permission_required = "django_schema_browser.can_access_schema_browser"
+    raise_exception = True
+
+
+class HomeView(SchemaBrowserPermissionRequiredMixin, TemplateView):
     template_name = "django_schema_browser/home.html"
 
     def get_context_data(self, **kwargs: object) -> dict[str, object]:
@@ -15,7 +21,7 @@ class HomeView(TemplateView):
         return context
 
 
-class AppModelsView(TemplateView):
+class AppModelsView(SchemaBrowserPermissionRequiredMixin, TemplateView):
     template_name = "django_schema_browser/app_models.html"
 
     def get_context_data(self, **kwargs: object) -> dict[str, object]:
@@ -32,7 +38,7 @@ class AppModelsView(TemplateView):
         return context
 
 
-class ModelDetailView(TemplateView):
+class ModelDetailView(SchemaBrowserPermissionRequiredMixin, TemplateView):
     template_name = "django_schema_browser/model_detail.html"
 
     def get_context_data(self, **kwargs: object) -> dict[str, object]:

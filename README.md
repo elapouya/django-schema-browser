@@ -29,3 +29,7 @@ urlpatterns += i18n_patterns(
     path("schema/", include("django_schema_browser.urls")),
 )
 ```
+
+Important, if the user is not a superuser, 
+the user must have the `django_schema_browser.view_schema` permission. 
+Be sure to add it to the user our user's group via the admin interface.

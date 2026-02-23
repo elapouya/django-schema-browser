@@ -5,6 +5,7 @@ from __future__ import annotations
 import ast
 import importlib
 import inspect
+import re
 import textwrap
 from pathlib import Path
 from typing import Any
@@ -31,6 +32,40 @@ def _pick_description(*candidates: Any) -> str:
         if normalized:
             return normalized
     return tr(NO_DESCRIPTION)
+
+
+def _first_paragraph(text: Any) -> str:
+    if not text:
+        return ""
+    paragraphs = str(text).strip().split("\n\n")
+    if not paragraphs:
+        return ""
+    return paragraphs[0].strip()
+
+
+def _docstring_before_attributes(text: Any) -> str:
+    if not text:
+        return ""
+
+    lines = str(text).strip().splitlines()
+    stop_index = len(lines)
+    section_names = {"attributes", "attributs"}
+
+    for index, line in enumerate(lines):
+        stripped = line.strip()
+        lowered = stripped.lower()
+        normalized = lowered.lstrip("#").strip()
+        normalized = normalized.rstrip(":").strip()
+
+        if normalized in section_names:
+            stop_index = index
+            break
+
+        if re.match(r"^:([a-z_]+:)?ivar\b", lowered):
+            stop_index = index
+            break
+
+    return "\n".join(lines[:stop_index]).strip()
 
 
 def _is_project_path(path: str) -> bool:
@@ -95,7 +130,7 @@ def _app_description(app_config: AppConfig) -> str:
 
 
 def _model_description(model: type[Model]) -> str:
-    model_doc = inspect.getdoc(model)
+    model_doc = _first_paragraph(_explicit_class_docstring(model))
     verbose_name = str(model._meta.verbose_name)
     default_verbose_name = model.__name__.replace("_", " ")
     if verbose_name.lower() == default_verbose_name.lower():
@@ -122,7 +157,8 @@ def _explicit_class_docstring(model: type[Model]) -> str:
 
 
 def _model_detail_description(model: type[Model]) -> str:
-    return _pick_description(_explicit_class_docstring(model))
+    class_doc = _explicit_class_docstring(model)
+    return _pick_description(_docstring_before_attributes(class_doc))
 
 
 def _field_type(field: Any) -> str:

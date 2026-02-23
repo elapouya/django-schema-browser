@@ -102,6 +102,9 @@ msgstr "Modele source"
 msgid "[SQL table]"
 msgstr "Table SQL"
 
+msgid "[SQL table:]"
+msgstr "Table SQL :"
+
 msgid "[SQL table: %(table_name)s]"
 msgstr "Table SQL : %(table_name)s"
 

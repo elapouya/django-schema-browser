@@ -7,7 +7,7 @@ from . import views
 app_name = "django_schema_browser"
 
 urlpatterns = [
-    path("", views.home, name="home"),
-    path("apps/<slug:app_label>/", views.app_models, name="app_models"),
-    path("apps/<slug:app_label>/models/<slug:model_name>/", views.model_detail, name="model_detail"),
+    path("", views.HomeView.as_view(), name="home"),
+    path("apps/<slug:app_label>/", views.AppModelsView.as_view(), name="app_models"),
+    path("apps/<slug:app_label>/models/<slug:model_name>/", views.ModelDetailView.as_view(), name="model_detail"),
 ]
